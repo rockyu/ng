@@ -1,0 +1,64 @@
+	<div id="story-board" class="span5 sidebar-content">
+        Search: <input ng-model="query"><br />
+
+        Sort by:
+        <select ng-model="orderProp">
+        	<option value="title">Title</option>
+        	<option value="status">Status</option>
+        	<option value="type">Type</option>
+        </select> 	
+
+        <h2>Story</h2>
+	    <form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="inputTitle">Title</label>
+			<div class="controls">
+				<input type="text" placeholder="Title" ng-model="currentStory.title">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputDescription">Description</label>
+			<div class="controls">
+				<textarea id="inputDescription" placeholder="Description" rows="3"
+						ng-model="currentStory.description">
+				</textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputStatus">Status</label>
+			<div class="controls">
+				<select id="inputStatus"
+					ng-model="currentStatus"
+					ng-options="s.name for s in statuses"></select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputType">Type</label>
+			<div class="controls">
+				<select id="inputType"
+					ng-model="currentType"
+					ng-options="s.name for s in types"></select>
+			</div>
+		</div>
+	    </form>
+	
+	<br>
+	<a class="btn btn-primary" ng-click="createStory()">Create Story</a>
+	</div>
+	
+	<div class="span8 body-content">
+		<h2>Stories</h2>
+		<div class="story" 
+			 ng-repeat="story in stories | filter:query | orderBy:orderProp">
+
+			<div>
+				<div>
+					<a href="#/assignee/{{story.assignee}}"><img ng-src="img/{{story.assignee}}.jpg" class="avator"></a>
+				</div>
+				<strong>{{story.title}}</strong> <a href="#" ng-click="setCurrentStory(story)">View</a>
+				<br />[{{story.status}}]
+				<br />[{{story.type}}]
+				<p>{{story.description}}</p>
+			</div> 
+		</div>	
+	</div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div ng-app="Angello" ng-controller="MainCtrl">
+
+	<div class="span4 sidebar-content">
+		<h2>Stories</h2>
+		<div class="story" ng-repeat="story in stories" ng-click="setCurrentStory(story)">
+			<h4>{{story.title}}</h4>
+			<p>{{story.description}}</p>
+		</div>
+	</div>
+	
+	<div class="span6 body-content">
+	<h2>Story</h2>
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="inputTitle">Title</label>
+			<div class="controls">
+				<input type="text" placeholder="Title" ng-model="currentStory.title">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputDescription">Description</label>
+			<div class="controls">
+				<textarea id="inputDescription" placeholder="Description" rows="3"
+						ng-model="currentStory.description">
+				</textarea>
+			</div>
+		</div>
+	</form>
+	
+	<br>
+	<a class="btn" ng-click="createStory()"><i class="icon-plus">Create Story</i></a>
+	</div>
+</div>
+
+
+</body>
+
+<head>
+    <script src="js/angular.js"></script>
+	<script>
+	var myModule = angular.module('Angello', []);
+	myModule.controller('MainCtrl', function($scope) {
+		$scope.stories = [
+			{title:'Story 00', description:'Description pending.'},
+			{title:'Story 01', description:'Description pending.'},
+			{title:'Story 02', description:'Description pending.'},
+			{title:'Story 03', description:'Description pending.'},
+			{title:'Story 04', description:'Description pending.'},
+			{title:'Story 05', description:'Description pending.'}
+		];
+		
+		$scope.currentStory;
+		$scope.setCurrentStory = function(story) {
+			$scope.currentStory = story;
+		};
+		
+		$scope.createStory = function() {
+			$scope.stories.push({
+				title:'New Story',
+				description:'Description pending.'
+			});
+		};
+	});
+	</script>
+</head>
+</html>
